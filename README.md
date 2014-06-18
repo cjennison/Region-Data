@@ -10,11 +10,11 @@ See V:0.1 for Details. http://felek.cns.umass.edu:1337/
 
 ####UPDATES
 #####V.01: Young Trout
-> Added login and register system (WARNING: NOT SECURED)
-> Added Upload support for CSV only (currently)
-> Added Browse/Editing (not complete)
-> Added Data Viewing Option (Only line graph is available)
-> Added Share button. Use this to share with your friends the URL to your data
-> Added Download button. Currently supporting CSV and JSON
-> Added Public Explore button. Shows all created repositories
+> - Added login and register system (WARNING: NOT SECURED)
+> - Added Upload support for CSV only (currently)
+> - Added Browse/Editing (not complete)
+> - Added Data Viewing Option (Only line graph is available)
+> - Added Share button. Use this to share with your friends the URL to your data
+> - Added Download button. Currently supporting CSV and JSON
+> - Added Public Explore button. Shows all created repositories
 
