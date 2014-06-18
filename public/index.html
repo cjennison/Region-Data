@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/frontpage.css" rel="stylesheet">
+
+  </head>
+ 
+  <body>
+  	
+  	<!--<div class="col-md-2 col-md-push-10" id="col_menu">
+		
+		<div class="row section" id="section_topmenu">
+			
+			<div id="buttons_topmenu">
+
+					<a>HOME</a>
+					<a>EXPLORE</a>
+					<a><i>MY</i>DATA</a>
+
+			</div>
+			
+		</div>
+		
+		<div class="row" id="section_login">
+			
+			<form>
+				
+  				<input type="text" class="form-control" placeholder="username (or email)"></input>
+  				<input type="password" class="form-control" placeholder="password"></input>
+  				<a id="button_register">Register</a>
+  				<button type="button" id="button_login" class="btn btn-default">Log In</button>
+  				
+  			</form>
+  			
+		</div>
+		
+	</div>
+	
+	<div class="col-md-10 col-md-pull-2" id="col_content">
+		
+		<div class="row section" id="section_title">
+			REGION<strong>DATA</strong>
+		</div>
+		
+		<div class="row" id="section_description">
+			<p>A public place where <strong>all</strong> data is accessible and easy to find.</p>
+		</div>
+		
+		<div class="row" id="section_search">
+			
+			<div class="col-md-9" id="section_searchbar">
+				
+				<p id="header_finddatanow">FIND <strong>DATA</strong> NOW</p>
+				
+				<input type="text" id="searchbar" class="form-control"></input>
+				
+				<button class="btn btn-default" type="button" id="button_search">Search</button>
+				
+				<button class="btn btn-default" type="button" id="button_explore">Explore</button>
+				
+			</div>
+			
+			<div class="col-md-3" id="section_searchdesc">
+				2013 High School Graduates Per State.
+			</div>
+			
+		</div>
+		
+		<div class="row" id="section_updates">
+			<p id="title_news"><u>NEWS & UPDATES</u></p>
+		</div>
+		
+	</div>
+	
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/frontpage.js"></script>
+    
+    <script language="JavaScript">
+    	createPost("Hey!", "Let's try this out, shall we?");
+    	createPost("Second Post", "I hope multiple look okay.");
+    </script>-->
+    
+	<div class="col-md-12">
+		
+		<div class="row content-row">
+			<div class="col-lg-1 col-centered content-col">
+				
+				<a href="/index.html" id="button_header">
+				
+					<img src="/img/logo_regiondata.png" id="logo"></img>
+				
+					<div id="text_header">
+				
+						<div id="header">REGION<strong style="color:#0dc2a5;">DATA</strong></div>
+						<div id="subheader">A public place where <strong>ALL</strong> data is accessible and easy to find.</div>
+				
+					</div>
+				
+				</a>
+				
+			</div>
+			
+		</div>
+		
+		<hr class="divider_horz">
+		
+		<div class="row content-row">
+			<div class="col-lg-1 col-centered content-col">
+				
+				<div class="text_hdr">Search anything.</div><br>
+				
+				<div class="col-md-10 content-col">
+					
+					<input type="text" id="searchbar" class="form-control field-std">
+					
+				</div>
+				
+				<div class="col-md-2 content-col">
+					
+					<button class="btn btn-default btn-regiondata" type="button" id="button_search">Search</button>
+					<button class="btn btn-default btn-regiondata" type="button" id="button_explore">Explore</button>
+					
+				</div>
+				
+			</div>
+		</div>
+		
+		<hr class="divider_horz">
+		
+		<div class="row content-row">
+			<div class="col-lg-1 col-centered content-col" id="col_login">
+				<div class="text_hdr">Save, upload, edit, and personalize.</div><br>
+				
+				
+				<div class="col-md-10 content-col">
+					
+					<div class="col-md-6 content-col">
+					
+						<input type="text" id="field_username" placeholder="username" class="form-control field-std">
+					
+					</div>
+					
+					<div class="col-md-6 content-col">
+						
+						<input type="password" id="field_password" placeholder="password" class="form-control field-std">
+					
+					</div>
+					
+				</div>
+				
+				<div class="col-md-2 content-col">
+					
+					<button class="btn btn-default btn-regiondata" type="button" id="button_login">Log In</button>
+					
+				</div>
+				
+				<br><br>
+				
+				<button class="btn btn-lg btn-regiondata" type="button" id="button_register">Register</button>
+				
+			</div>
+		</div>
+		
+		<hr class="divider_horz" id="divider_register">
+		
+		<div class="row content-row" id="row_register">
+			
+			<div class="col-log-1 col-centered">
+				<div class="text_hdr">Adventure Awaits!</div><br>
+				<input type="text" id="field_registerusername" placeholder="username" class="form-control field-register"></input>
+				<input type="text" id="field_registeremail" placeholder="email" class="form-control field-register"></input>
+				<input type="text" id="field_registerpassword" placeholder="password" class="form-control field-register"></input>
+				<input type="text" id="field_registerconfirmpassword" placeholder="confirm password" class="form-control field-register"></input>
+				<button class="btn btn-lg btn-regiondata" type="button" id="button_registerfinish">Done</button>
+			</div>
+			
+		</div>
+		
+		<div class="row content-row" id="row_posts">
+			
+			<div class="col-log-1 col-centered content-col">
+				
+				<div class="text_hdr" style="color:white;">Header</div><br>
+				
+				<div class="text_nrm">
+				
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempor ultricies est, eget pellentesque lacus lacinia ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras interdum turpis id magna ornare tempor. Integer venenatis quam et justo varius, ut lobortis magna tristique. Aenean dignissim elit in vestibulum consectetur. Nullam auctor velit mi, id vulputate erat iaculis imperdiet. Cras facilisis vehicula velit, vitae tincidunt odio vulputate in.
+
+				Nulla egestas, eros dignissim volutpat interdum, purus purus sagittis nisl, non luctus lorem arcu eu tellus. Quisque consequat luctus sem, a porttitor diam tristique eget. Nullam vehicula ut justo vel consectetur. Nunc interdum commodo augue, sed dictum dui accumsan quis. Maecenas aliquet, lorem a bibendum dapibus, tortor est iaculis nisi, sed rutrum quam mauris sit amet nulla. Cras molestie semper ante sit amet vulputate. Vivamus odio ipsum, auctor vitae leo ut, blandit consectetur tellus.
+				
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="row content-row">
+			
+			<div class="col-log-1 col-centered content-col">
+				
+				<input type="image" class="icon-socmedia" src="/img/twitter_teal.png">
+				<input type="image" class="icon-socmedia" src="/img/facebook_teal.png">
+				<input type="image" class="icon-socmedia" src="/img/linkedin_teal.png">
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/frontpage.js"></script>
+    
+  </body>
+</html>

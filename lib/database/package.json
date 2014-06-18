@@ -1,0 +1,7 @@
+{
+	"name": "database",
+  "version": "0.0.1",
+  "author": "Chris Jennison <cjennison92@gmail.com>",
+  "description": " a library for database commands",
+  "main": "./database.js"
+}

@@ -1,0 +1,51 @@
+/* Empty */
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    width:90%;
+}
+
+thead{
+	font-weight:900;
+}
+
+.usemodelbtn{
+	float:right;
+	margin-top:-20px;
+}
+
+.panel{
+	overflow-x: auto;
+	width:100%;
+}
+
+.status{
+	width: 60%;
+float: left;
+margin: 6px;
+}
+
+.runmodel{
+	float:left;
+}
+
+.console{
+	height: 20px;
+	background: rgba(0,0,0,.05);
+	width: 71%;
+	margin-top: 18px;
+	padding-left: 44px;
+	overflow-y:hidden;
+}
+
+.console.active{
+	height:500px;
+}
+
+.expandconsole{
+	float: right;
+	height: 22px;
+	margin: 0;
+	padding: 2px;
+}
