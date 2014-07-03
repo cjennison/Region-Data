@@ -1,0 +1,58 @@
+.content-col{
+	
+	width:90%;
+	
+}
+
+.form-control{
+	
+	margin-bottom:0;
+	
+}
+
+#btn_savedata{
+	
+	float:right;
+	
+}
+
+#btn_confirmrelate{
+	
+	float:right;
+	
+}
+
+#btn_specrelation{
+	
+	float:right;
+	margin-left:10px;
+	
+}
+
+#panel_datatable{
+	
+	overflow:scroll;
+	
+}
+
+#field_dataname{
+	
+	width:500px;
+	float:right;
+	margin-right:10px;
+	
+}
+
+#header_dataname{
+	
+	margin-bottom:0;
+	
+}
+
+.btn-regiondata:disabled{
+	
+	background-color:gray;
+	color:black;
+	border-color:black;
+	
+}

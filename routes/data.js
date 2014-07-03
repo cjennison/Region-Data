@@ -29,8 +29,46 @@ exports.getDataByDate = function(req, res){
  */
 exports.uploadData = function(req, res){
 	
+	console.log("uploadData req body -->");
+	console.log(req.body);
+	console.log("<-- uploadData req body");
+	
 	uploader.startUpload(req, res);
 	
+	
+}
+
+exports.addRelation = function(req, res){
+	
+	database.addRelation(req.session.username, req.body.database, req.body.attribute, req.body.relateddb, req.body.relateto, function(d){
+		
+		res.json(d);
+		
+	});
+	
+}
+
+exports.getRelations = function(req, res){
+	
+	database.getRelations(req.session.username, req.body.database, function(d){
+		
+		/*console.log("The following is d -->");
+		console.log(d);
+		
+		res.json(d);*/
+		
+		if (d == undefined){
+			
+			res.json([]);
+			
+		}else {
+			
+			res.json(d);
+			
+		}
+		
+		
+	});
 	
 }
 
@@ -94,6 +132,39 @@ exports.sendResults = function(req, res){
 		res.json(d)
 	})
 	
+	
+}
+
+exports.getMoreRows = function(req, res){
+	var last = req.body.last;
+	var next = req.body.next;
+	var db	 = req.body.db;
+	var user = req.session.username;
+	
+	database.getMoreRows(db, last, next, user, function(d){
+		res.json(d);
+	})
+	
+	
+}
+
+exports.createDatabase = function(req, res){
+	
+	database.createDatabase(req.session.username, req.body, function(d){
+		
+		res.json(d);
+		
+	});
+	
+}
+
+exports.removeDatabase = function(req, res){
+	
+	database.removeDatabase(req.body.db, req.body.user, function(d){
+		
+		res.json(d);
+		
+	});
 	
 }
 

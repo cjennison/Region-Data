@@ -44,68 +44,84 @@ app.configure(function(){
 
 
 
+//NAVIGATION
+app.get('/view-results', user_routes.viewResults);
 
-
-
-
-
-//Routes
 app.get('/', function(req, res){
+	if(req.session.username != undefined){
+		res.redirect('/main');
+		
+		return;
+	}
 	//res.send("<b>My Name is Bill Clinton</b>");
 	res.render('index.ejs');
+});
+app.get('/browse', user_routes.browsePage);
+app.get('/edit', user_routes.editPage);
+app.get('/browse', user_routes.browsePage);
+app.get('/model', user_routes.modelPage);
+app.get('/db', user_routes.showDatabase);
+app.get('/data-viewer', user_routes.viewData);
+app.get('/explore', user_routes.exploreData);
+app.get('/data-settings', function(req, res){
+	if(req.session.username == undefined){
+		res.redirect('/');
+		
+		return;
+	}
+	
+	res.render('settings.ejs');
+})
+app.get('/main', function(req, res){
+	
+	if(req.session.username == undefined){
+		res.redirect('/');
+		
+		return;
+	}
+	
+	res.render('main.ejs');
 })
 
 
-app.post('/send-results', data_routes.sendResults);
-
-app.get('/view-results', user_routes.viewResults);
-
+//LOGIN
 app.post('/register-user', user_routes.registerUser);
-
 app.post('/login-user', user_routes.loginUser);
 
-app.post('/get-data-by-date', data_routes.getDataByDate);
 
+//UPLOAD
 app.post('/upload', data_routes.uploadData);
 
-app.get('/browse', user_routes.browsePage);
-
-app.get('/create', user_routes.createPage);
-
-app.get('/model', user_routes.modelPage);
-
-app.get('/user-databases', data_routes.exportDatabases);
-app.get('/db', user_routes.showDatabase);
-
-
-app.post('/showdatabase', data_routes.showDatabaseOfUser);
-
+//DOWNLOAD
 app.post('/download', data_routes.download);
 
+
+
+//DATA
 app.post('/send-results', data_routes.sendResults);
-
-app.get('/data-viewer', user_routes.viewData);
-
-app.get('/explore', user_routes.exploreData);
-
+app.post('/get-data-by-date', data_routes.getDataByDate);
+app.get('/user-databases', data_routes.exportDatabases);
+app.post('/showdatabase', data_routes.showDatabaseOfUser);
+app.post('/send-results', data_routes.sendResults);
 app.get('/getAllData', data_routes.getAllData);
-
-
 app.post('/viewDatabase', data_routes.getSingleDatabase);
+app.post('/create-database', data_routes.createDatabase);
+app.post('/remove-database', data_routes.removeDatabase);
+app.post('/add-relation', data_routes.addRelation);
+app.post('/get-relations', data_routes.getRelations);
 
+
+//UI
+app.post('/morerows', data_routes.getMoreRows);
+
+
+//UTIL
 app.get('/whoami', function(req, res){
 	res.json(req.session.username);
 })
 
 
-app.get('/main', function(req, res){
-	
-	if(req.session.username == undefined){
-		res.redirect('/');
-	}
-	
-	res.render('main.ejs');
-})
+
 
 //Listener
 var server = app.listen(1337, function(){

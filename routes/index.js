@@ -34,9 +34,9 @@ exports.browsePage = function(req, res){
 	res.render('browse.ejs');
 }
 
-exports.createPage = function(req, res){
+exports.editPage = function(req, res){
 	
-	res.render('create.ejs');
+	res.render('edit.ejs');
 	
 }
 

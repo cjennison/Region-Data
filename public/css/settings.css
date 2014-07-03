@@ -1,0 +1,33 @@
+/*Related to settings.ejs.*/
+
+.content-col{
+	
+	width:50%;
+	
+}
+
+.divider-horz-margin{
+	
+	margin-top:10px;
+	margin-bottom:30px;
+	
+}
+
+.btn-primary{
+	
+	background-color:#17d1b3 !important;
+	border-color:#17d1b3 !important;
+	
+}
+
+.btn-default{
+	
+	color:gray;
+	
+}
+
+#btn_save{
+	
+	float:right;
+	
+}

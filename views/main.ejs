@@ -51,6 +51,50 @@
 				
 				<div class="col-lg-1 col-centered content-col" id="my_data">
 					
+					<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+										
+										<span class="glyphicon glyphicon-remove"></span>
+										
+									</button>
+									
+									<h4 class="modal-title text_hdr" id="myModalLabel">Upload Data</h4>
+									
+								</div>
+								
+								<div class="modal-body">
+									
+									<form action='/upload' method='post' id="form_upload" enctype='multipart/form-data'>
+						
+										<input type="text" class="form-control" id="field_name" name="name" placeholder="Name">
+										<input type="text" class="form-control" id="field_subject" name="subject" placeholder="Subject (optional)">
+										<textarea rows="4" class="form-control" placeholder="Description (optional)" id="field_description" name="description"></textarea>
+										
+										<input type='file' id="btn_choosefile" name='uploadfile'>
+										
+										<hr class="divider-horz-margin">
+										
+										<input type='submit'  id="btn_upload" class="btn btn-default btn-regiondata" value='upload'>
+										<input type="checkbox" name="gotosettings" id="checkbox_settings"> Go to settings after upload.</input><br>
+
+
+									</form>
+									
+								</div>
+								
+								<!--<div class="modal-footer">
+									<button type="button" class="btn btn-regiondata">
+										Upload
+									</button>
+								</div>-->
+							</div>
+						</div>
+					</div>
+					
 					<div class="panel panel-default">
 						
 						<div class="panel-heading heading-regiondata">My Data</div>
@@ -77,11 +121,32 @@
 						
 					</div>
 					
+					<div class="btn-group" id="btn_addnew">
+						
+						<button class="btn btn-default btn-lg btn-regiondata dropdown-toggle" type="button" data-toggle="dropdown">Add Data  </span><span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							
+							<li>
+								
+								<a href="#" data-toggle="modal" data-target="#basicModal">Upload</a>
+								
+							</li>
+							
+							<li>
+								
+								<a href="/edit?file=new">Create New</a>
+								
+							</li>
+							
+						</ul>
+						
+					</div>
+					
 				</div>
 				
 			</div>
 
-			<hr class="divider_horz">
+			<!--<hr class="divider_horz">
 			
 			<div class="row content-row">
 
@@ -90,7 +155,7 @@
 					<div class = "text_hdr">Upload Data</div><br>
 					
 
-					<form action='/upload' method='post' enctype='multipart/form-data'>
+					<!-- <form action='/upload' method='post' enctype='multipart/form-data'>
 						
 						<input type="text" class="form-control" id="field_filename" name="filename" placeholder="Name">
 						<input type='file' id="btn_choosefile" name='uploadfile'>
@@ -102,7 +167,7 @@
 
 				</div>
 
-			</div>
+			</div> -->
 			
 			<div class="row content-row">
 
@@ -116,6 +181,7 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/utils.js"></script>
 		<script src="js/main.js"></script>
 
 	</body>

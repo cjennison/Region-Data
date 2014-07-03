@@ -1,5 +1,8 @@
 var db = null;
 var limit = null;
+
+lastEntry = 0;
+
 var modifiedentries = [];
 
 $("#btn_back").attr("onclick", "window.location.href = '/main';");
@@ -11,10 +14,19 @@ $("#logo").attr("onclick", "window.location.href = '/main'");
 
 window.onload = function(){
 	
+	
+	$(window).scroll(function() {
+	   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+	    getMoreEntries();
+	   }
+	});
+	
+	
 	console.log("Browse loaded");
 	
 	db = getURLVariable("db");
 	limit = getURLVariable("limit");
+	lastEntry = limit;
 	
 	var browseDataset = {
 		db: db,
@@ -108,4 +120,49 @@ function saveChanges(){
 	
 	appendError("Save successful!")
 	
+}
+
+function getMoreEntries(){
+	var next = 10;
+	$.post('/morerows', { last:lastEntry, next:next, db:db }, function(response){
+		response.forEach(function(entry){
+			
+			var tr = $("<tr id='entry_" + entry._id + "'></tr>");
+			
+			for (var key in response[0]){
+				
+				if (key != "_id"){
+					
+					var field_edit = $("<input type='text' class='form-control' value='" + entry[key] + "'>");
+					var th = $("<th></th>");
+					
+					console.log(entry[key]);
+					
+					field_edit.focus(function(){
+					
+						//console.log(hey);
+						
+					});
+					
+					field_edit.blur(function(){
+						
+						finishEditField(field_edit);
+						
+					});
+					
+					th.append(field_edit)
+					
+					$(tr).append(th);
+				
+				}
+			}
+			
+			
+			
+			$("#content_data").append(tr);
+			
+		})
+		
+		lastEntry = lastEntry + next;
+	})
 }

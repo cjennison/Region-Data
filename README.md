@@ -9,6 +9,15 @@ But we are proud of what we could do in 3 days.
 See V:0.1 for Details. http://felek.cns.umass.edu:1337/
 
 ####UPDATES
+
+#####V.02: Angry Sturgeon
+> - Added browse & editing in an integrated system.
+> - Added download window, with options to enter subject, description, etc.
+> - Added support for relations between datasets (relations button near save). NOTE: if it's not a valid relation (i.e. nothing is related, the window shows nothing).
+> - Added deletion of databases (red button).
+> - Added settings page (not currently functional, but there).
+
+
 #####V.01: Young Trout
 > - Added login and register system (WARNING: NOT SECURED)
 > - Added Upload support for CSV only (currently)
