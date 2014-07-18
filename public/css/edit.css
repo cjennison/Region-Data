@@ -7,6 +7,19 @@
 .form-control{
 	
 	margin-bottom:0;
+	min-width:40px;
+	
+}
+
+.box-content{
+	
+	min-width:200px;
+	
+}
+
+.col-fixed{
+	
+	position:fixed;
 	
 }
 
@@ -30,7 +43,7 @@
 }
 
 #panel_datatable{
-	
+	margin-top:30px;
 	overflow:scroll;
 	
 }
@@ -43,9 +56,21 @@
 	
 }
 
+.editheader{
+	position: fixed;
+	margin-top: -41px;
+	width: 90%;
+}
+
 #header_dataname{
 	
 	margin-bottom:0;
+	
+}
+
+#icon_cog{
+	
+	margin-right:5px;
 	
 }
 
@@ -55,4 +80,16 @@
 	color:black;
 	border-color:black;
 	
+}
+
+#searchpanel{
+	position: absolute;
+	right: 0px;
+	display: inline-block;
+	margin-top: -24px;
+	width:50%;
+}
+
+#searchpanel .col-sm-3{
+	padding:0;
 }

@@ -1,0 +1,111 @@
+#btn_createschema{
+	
+	float:right;
+	
+}
+
+#btn_conformdataset{
+	
+	float:right;
+	
+}
+
+#sec_createschema .list-group{
+	
+	height:auto;
+	
+}
+
+#checkbox_replace{
+	
+	float:right;
+	margin-right:10px;
+	
+}
+
+#btn_addattr{
+	
+	width:100%;
+	margin-top:10px;
+	
+}
+
+.btn.disabled{
+	
+	opacity:0.4;
+	
+}
+
+.form-control{
+	
+	margin-top:10px;
+	
+}
+
+.panel{
+	
+	margin-bottom:0;
+	
+}
+
+.list-group-item.highlighted{
+	background:#dffffa;
+}
+
+.chevron{
+	
+	margin-top:10px;
+}
+
+.delete{
+	
+	margin-top:10px;
+	
+}
+
+.hr-regiondata{
+	
+	margin-top:0;
+	margin-bottom:10px;
+	
+}
+
+.opts-schemavar{
+	
+	padding-left:20px;
+	padding-right:20px;
+	margin-bottom:10px;
+	
+}
+
+.options{
+	
+	width:60%;
+	
+}
+
+.form-group{
+	
+	margin-bottom: 0;
+	
+}
+
+.control-label{
+	
+	text-align: left !important;
+	
+}
+
+.btn-regiondata{
+	
+	margin-top:10px;
+	
+}
+
+.btn-warning{
+	
+	margin-top:10px;
+	float:right;
+	margin-left:5px;
+	
+}

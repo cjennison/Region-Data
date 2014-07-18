@@ -1,54 +1,29 @@
 var datamatrix = [["", "", ""], ["", "", ""], ["", "", ""]];
 var relations = [];
 
+var STATE;// = getURLVariable("file");
+
+
 $("#btn_savedata").attr("onclick", "saveData()");
+
 $("#btn_confirmrelate").attr("onclick", "addRelation()");
 
+$("#btn_schemas").click(function(){
+	
+	console.log(getURLVariable("db"));
+	
+	window.location.href = "/schema?view=public&db=" + getURLVariable("db");
+	
+});
+
 $("#field_selectdb_other").change(function(){
-	
-	/*$.get('/whoami', function(username){
-		
-		var dataget = {
-			
-			db: $("#field_selectdb_other").find(":selected").text(),
-			user: username,
-			limit: 1
-			
-		}
-		
-		$.post('/viewDatabase', dataget, function(response){
-			
-			$("#field_selectprop_other").empty();
-			
-			if (response == null){
-				
-				console.log("Response was null!");
-					
-			}else{
-			
-				for (var key in response.data[0]){
-				
-					if (key != "_id"){
-					
-						$("#field_selectprop_other").append("<option>" + key + "</option>");
-					
-					}
-				
-				}
-				
-			}
-			
-		});
-		
-	});*/
-	
 	
 	refreshRelatedAttr();
 	
 });
 
 window.onload = function(){
-	
+	STATE = getURLVariable("file");
 	//loadRelations();
 	
 	if (getURLVariable("file") == "old"){
@@ -67,12 +42,8 @@ window.onload = function(){
 			existingheaders.push("");
 			
 			for (var key in response[0]){
-			
-				if (key != "_id"){
-					
-					existingheaders.push(key);
-						
-				}
+				
+				existingheaders.push(key);
 				
 			}
 			
@@ -86,12 +57,8 @@ window.onload = function(){
 				existingdatarow.push("");
 				
 				for (var key in response[i]) {
-
-					if (key != "_id") {
-
-						existingdatarow.push(response[i][key]);
-
-					}
+					
+					existingdatarow.push(response[i][key]);
 
 				}
 				
@@ -136,13 +103,16 @@ window.onload = function(){
 
 function renderTable(){
 	
+	$("#datatable tbody").remove();
+	
 	var headercolor = "#666666";
 	var oddcolor = "white";
 	var evencolor = "#F5F5F5";
+	var idrow = -1;
 	
 	for (var i = 0; i < datamatrix.length; i++){
-		
-		var newrow = $("<tr></tr>");
+	
+		var newrow = $("<tr ></tr>");
 		
 		if (i == 0 || i == datamatrix.length - 1){
 			
@@ -163,81 +133,101 @@ function renderTable(){
 		}
 		
 		for (var j = 0; j < datamatrix[i].length; j++){
+		
+			console.log("...attempting to create new column. j is " + j);
 			
-			var newcol = $("<td></td>");
-			
-			if (j == 0){
+			if (i == 0){
 				
-				if (i > 0 && i < datamatrix.length-1){
-					
-					if (datamatrix.length > 3){
-					
-						var btn_delete_row = $("<button type='button' class='btn'><span class='glyphicon glyphicon-remove'></span></button>");
-						btn_delete_row.attr("onclick", "removeRow(" + i + ")");
-						
-						newcol.append(btn_delete_row);
-					
-					}
-					
-				}else if (i == datamatrix.length-1){
-					
-					var btn_add_row = $("<button type='button' class='btn'>+ROW</button>");
-					btn_add_row.attr("onclick", "addRow()");
-					
-					newcol.append(btn_add_row);
-					
-					newcol.width(btn_add_row.width());
-					
-				}
+				console.log("...setting header: " + datamatrix[i][j]);
 				
-			}else if (j > 0 && j < datamatrix[i].length-1){
-				
-				
-				if (i != datamatrix.length-1){
-					
-				
-					var txt_cell_info = $("<input class='form-control' id = 'input_" + i + "_" + j + "'>");
-					txt_cell_info.val(datamatrix[i][j]);
-					
-					txt_cell_info.attr("onchange", "modCell(" + i + ", " + j + ")");
-					
-					if (i != 0 || datamatrix[0].length == 3){
-						
-						newcol.append(txt_cell_info);
-						
-					}else if (i == 0 && datamatrix[0].length > 3){
-						
-						var input_group = $("<div class='input-group'></div>");
-					
-						input_group.append(txt_cell_info);
-						
-						var input_group_btn = $("<span class='input-group-btn'></span>");
-						var btn_delete_col = $("<button type='button' class='btn btn-default'><span class='glyphicon glyphicon-remove'></span></button>");
-						btn_delete_col.attr("onclick", "removeCol(" + j + ")");
-						
-						input_group_btn.append(btn_delete_col);
-						input_group.append(input_group_btn);
-	
-						newcol.append(input_group);
-					}
-				
-				}
-				
-			}else if (j == datamatrix[i].length-1){
-				
-				if (i == 0){
-					
-					var btn_add_col = $("<button type='button' class='btn'>+COL</button>");
-					btn_add_col.attr("onclick", "addCol()");
-					btn_add_col.css("float", "right");
-					
-					newcol.append(btn_add_col);
-					
+				if (datamatrix[i][j] == "_id"){
+					idrow = j;
 				}
 				
 			}
 			
-			newrow.append(newcol);
+			if (j != idrow) {
+			
+				console.log("...this j isn't the id! enterring new column creation...");
+
+				var newcol = $("<td></td>");
+
+				if (j == 0) {
+
+					newcol.addClass("col-fixed");
+
+					if (i > 0 && i < datamatrix.length - 1) {
+
+						if (datamatrix.length > 3) {
+
+							var btn_delete_row = $("<button type='button' class='btn'><span class='glyphicon glyphicon-remove'></span></button>");
+							btn_delete_row.attr("onclick", "removeRow(" + i + ")");
+
+							newcol.append(btn_delete_row);
+
+						}
+
+					} else if (i == datamatrix.length - 1) {
+
+						var btn_add_row = $("<button type='button' class='btn'>+ROW</button>");
+						btn_add_row.attr("onclick", "addRow()");
+
+						newcol.append(btn_add_row);
+
+						newcol.width(btn_add_row.width());
+
+					}
+
+				} else if (j > 0 && j < datamatrix[i].length - 1) {
+
+					if (i != datamatrix.length - 1) {
+
+						var txt_cell_info = $("<input class='form-control' id = 'input_" + i + "_" + j + "'>");
+
+						txt_cell_info.val(datamatrix[i][j]);
+
+						txt_cell_info.attr("onchange", "modCell(" + i + ", " + j + ")");
+
+						if (i != 0 || datamatrix[0].length == 3) {
+
+							newcol.append(txt_cell_info);
+							newcol.addClass("box-content");
+
+						} else if (i == 0 && datamatrix[0].length > 3) {
+
+							var input_group = $("<div class='input-group'></div>");
+
+							input_group.append(txt_cell_info);
+
+							var input_group_btn = $("<span class='input-group-btn'></span>");
+							var btn_delete_col = $("<button type='button' class='btn btn-default'><span class='glyphicon glyphicon-remove'></span></button>");
+							btn_delete_col.attr("onclick", "removeCol(" + j + ")");
+
+							input_group_btn.append(btn_delete_col);
+							input_group.append(input_group_btn);
+
+							newcol.append(input_group);
+						}
+
+					}
+
+				} else if (j == datamatrix[i].length - 1) {
+
+					if (i == 0) {
+
+						var btn_add_col = $("<button type='button' class='btn'>+COL</button>");
+						btn_add_col.attr("onclick", "addCol()");
+						btn_add_col.css("float", "right");
+
+						newcol.append(btn_add_col);
+
+					}
+
+				}
+
+				newrow.append(newcol);
+
+			}
 			
 		}
 		
@@ -265,8 +255,6 @@ function refreshProperties(){
 
 function refreshRelatedAttr(){
 	
-	console.log("Refreshing related attributes!");
-	
 	$.get('/whoami', function(username){
 		
 		var dataget = {
@@ -281,9 +269,7 @@ function refreshRelatedAttr(){
 			
 			$("#field_selectprop_other").empty();
 			
-			if (response == null){
-				
-				console.log("Response was null!");
+			if (response == undefined){
 					
 			}else{
 			
@@ -326,68 +312,6 @@ function getOtherDatasets(cb){
 	
 }
 
-/*function createRelationButtons(lookfor, relateto, relatedb){
-	
-	$("#relationModal").modal('hide');
-	var lookfor = $("#field_selectprop_self").val();
-	var relateto = $("#field_selectprop_other").val();
-	var relatedb = $("#field_selectdb_other").val();
-	
-	
-	
-	$.each(datamatrix[0], function(index, value){
-		
-		if (value == lookfor){
-			
-			for (var i = 1; i < datamatrix.length - 1; i++){
-				
-				var dropdown = $("<div class='dropdown'></div>");
-				var caret = $("<span class='caret'></span>");
-				var btn_dropdown = $("<button class='btn btn-default btn-sm dropdown-toggle btn-regiondata' type='button' data-toggle='dropdown'></button>");
-				var menu_dropdown = $("<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1'></ul>");
-				var list_dropdown = $("<li></li>");
-				var entry_dropdown = $("<a role='menuitem' tabindex = '-1' href ='#'>" + relatedb + ": " + relateto + "</a>");
-				
-				entry_dropdown.attr("onclick", "getRelatedData('" + relatedb + "', '" + relateto + "', '" + $("#input_" + i + "_" + index).val() +  "')");
-				
-				btn_dropdown.append("Relations  ");
-				btn_dropdown.append(caret);
-				
-				list_dropdown.append(entry_dropdown);
-				menu_dropdown.append(list_dropdown);
-				
-				dropdown.append(btn_dropdown);
-				dropdown.append(menu_dropdown);
-				
-				dropdown.css("margin-top", "10px");
-				
-				$("#input_" + i + "_" + index).after(dropdown);
-				
-			}
-			
-		}
-		
-	});
-	
-	var newrelation = {
-		
-		database: getURLVariable('db'),
-		attribute: lookfor,
-		relateddb: relatedb,
-		relateto: relateto
-		
-	}
-	
-	console.log(newrelation);
-	
-	$.post('/add-relation', newrelation, function(response){
-		
-		console.log(response);
-		
-	});
-	
-}*/
-
 function addRelation(){
 
 	var newrelation = {
@@ -401,8 +325,6 @@ function addRelation(){
 	
 	$.post('/add-relation', newrelation, function(response){
 		
-		console.log(response);
-		
 		refreshRelations(function(){
 		
 			renderRelations();
@@ -414,11 +336,6 @@ function addRelation(){
 }
 
 function getRelatedData(db, field, lookfor){
-	
-	console.log("I enter getRelatedData!");
-	console.log("db: " + db);
-	console.log("field: " + field);
-	console.log("lookfor: " + lookfor);
 	
 	$.get('/whoami', function(username){
 		
@@ -432,8 +349,6 @@ function getRelatedData(db, field, lookfor){
 		
 		$.post('/viewDatabase', dataget, function(response){
 			
-			console.log("Got a response!");
-			console.log(response);
 			var founddata = "";
 			
 			if (response == null){
@@ -446,14 +361,9 @@ function getRelatedData(db, field, lookfor){
 					
 					if (response.data[i][field] == lookfor){
 						
-						console.log("Found a match!");
-						console.log(response.data[i]);
-						
 						founddata += JSON.stringify(response.data[i]) + "\n";
 						
 					}else{
-						
-						console.log("Failed to find a match!");
 						
 					}
 					
@@ -472,8 +382,6 @@ function getRelatedData(db, field, lookfor){
 
 function refreshRelations(cb){
 	
-	console.log("I enter refreshRelations()");
-	
 	var refreshobject = {
 		
 		database: getURLVariable('db')
@@ -483,9 +391,6 @@ function refreshRelations(cb){
 	$.post('/get-relations', refreshobject, function(response){
 		
 		relations = response;
-		
-		console.log("Relations -->");
-		console.log(relations);
 		
 		cb();
 		
@@ -504,8 +409,6 @@ function renderRelations(){
 		$.each(datamatrix[0], function(index, value){
 			
 			if (value == targetattribute){
-				
-				console.log("index is now " + index);
 				
 				for (var j = 1; j < datamatrix.length - 1; j++){
 					
@@ -543,41 +446,6 @@ function renderRelations(){
 		})
 		
 	}
-	
-	/*$.each(datamatrix[0], function(index, value){
-		
-		if (value == lookfor){
-			
-			for (var i = 1; i < datamatrix.length - 1; i++){
-				
-				var dropdown = $("<div class='dropdown'></div>");
-				var caret = $("<span class='caret'></span>");
-				var btn_dropdown = $("<button class='btn btn-default btn-sm dropdown-toggle btn-regiondata' type='button' data-toggle='dropdown'></button>");
-				var menu_dropdown = $("<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1'></ul>");
-				var list_dropdown = $("<li></li>");
-				var entry_dropdown = $("<a role='menuitem' tabindex = '-1' href ='#'>" + relatedb + ": " + relateto + "</a>");
-				
-				entry_dropdown.attr("onclick", "getRelatedData('" + relatedb + "', '" + relateto + "', '" + $("#input_" + i + "_" + index).val() +  "')");
-				
-				btn_dropdown.append("Relations  ");
-				btn_dropdown.append(caret);
-				
-				list_dropdown.append(entry_dropdown);
-				menu_dropdown.append(list_dropdown);
-				
-				dropdown.append(btn_dropdown);
-				dropdown.append(menu_dropdown);
-				
-				dropdown.css("margin-top", "10px");
-				
-				$("#input_" + i + "_" + index).after(dropdown);
-				
-			}
-			
-		}
-		
-	});
-	*/
 }
 
 function modCell(row, col){
@@ -649,57 +517,129 @@ function removeCol(ind){
 	
 }
 
-function saveData(ind){
-	
+
+function saveData(ind) {
+
 	var dataToSend = {
-		
-		name: "",
-		filename: "",
-		size: "",
-		data: []
-			
+
+		name : "",
+		filename : "",
+		size : "",
+		data : []
+
 	}
-	
-	if ($("#field_dataname").val() == ""){
-		
+
+	if ($("#field_dataname").val() == "") {
+
 		$("#field_dataname").attr("placeholder", "A name is required to save!");
 		$("#field_dataname").css("background-color", "#e6f8f6");
 		$("#field_dataname").css("border-color", "#0dc2a5");
-		
-	}else{
-	
+
+	} else {
+
 		dataToSend.name = $("#field_dataname").val();
 		dataToSend.filename = convertToValidFilename($("#field_dataname").val());
-		console.log(dataToSend.name);
-		
-		
-		for (var i = 1; i < datamatrix.length-1; i++){
-			
+
+		for (var i = 1; i < datamatrix.length - 1; i++) {
+
 			var newEntry = {};
-			
-			for (var j = 1; j < datamatrix[0].length - 1; j++){
-				
+
+			for (var j = 1; j < datamatrix[0].length - 1; j++) {
+
 				newEntry[datamatrix[0][j]] = datamatrix[i][j];
-				
+
 			}
-			
+
+			if (i == 1 && j == 1) {
+
+				console.log("Sample entry from saveData():");
+				console.log(newEntry);
+
+			}
+
 			dataToSend.data.push(newEntry);
-				
+
 		}
-		
+
 		var stringObject = JSON.stringify(dataToSend.data);
-		
-		dataToSend.size = bytesToSize(stringObject.length*8);
-		
-		$.post("/create-database", dataToSend, function(response){
+
+		dataToSend.size = bytesToSize(stringObject.length * 8);
+
+		if (STATE == "new") {
 			
-			console.log(response);
-			$("#my_data").append("<div class='alert alert-success' role='alert'>Save successful! You can <a href='/main'>go back to the home screen</a> or continue editing.</div>");
+			console.log("...Enterring the new state of save...");
+
 			
-		});
+			$.post("/create-database", dataToSend, function(response) {
+
+				console.log("RECEIVING RESPONSE FROM /CREATE-DATABASE:");
+				console.log(response);
+
+				$("#header_dataname").text($("#field_dataname").val());
+
+				var existingmatrix = [];
+				var existingheaders = [];
+				existingheaders.push("");
+
+				for (var key in response[0]) {
+
+					existingheaders.push(key);
+
+				}
+
+				existingheaders.push("");
+
+				existingmatrix.push(existingheaders);
+
+				for (var i = 0; i < response.length; i++) {
+
+					var existingdatarow = [];
+					existingdatarow.push("");
+
+					for (var key in response[i]) {
+
+						existingdatarow.push(response[i][key]);
+
+					}
+
+					existingdatarow.push("");
+
+					existingmatrix.push(existingdatarow);
+
+				}
+
+				existingmatrix.push(new Array(existingmatrix[0].length));
+
+				console.log(existingmatrix);
+
+				datamatrix = existingmatrix;
+				
+				renderTable();
+
+				/*refreshRelations(function() {
+
+					renderTable();
+
+				});*/
+
+				$("#my_data").append("<div class='alert alert-success' role='alert'>Save successful! You can <a href='/main'>go back to the home screen</a> or continue editing.</div>");
+
+			}); 
+
+			STATE = "old";
+		} else {
+
+			$.post("/update-database", dataToSend, function(response) {
+
+				$("#my_data").append("<div class='alert alert-success' role='alert'>Save successful! You can <a href='/main'>go back to the home screen</a> or continue editing.</div>");
+
+			});
+		}
+
 	}
-		
+
 }
+
 
 function bytesToSize(bytes) {
 	
@@ -715,77 +655,3 @@ function convertToValidFilename(name){
 	return name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_');
 	
 }
-
-/*for (var i = 0; i < datamatrix.length; i++){
-		
-		var newrow = $("<tr></tr>");
-		
-		for (var j = 0; j < datamatrix[i].length; j++){
-			
-			var newcol = $("<td></td>");
-				
-			if (j > 0){
-				
-				if (j == datamatrix[i].length - 1){
-					
-					var btn_addrow = $("<button type='button'>+</button>");
-					newcol.append(btn_addrow);
-					
-				}else{
-			
-					var text_newcol = $("<input type='text'>");
-					
-					text_newcol.val(datamatrix[i][j]);
-					
-					text_newcol.change(function(){
-						
-						console.log("This is the datamatrix: " + datamatrix);
-						console.log("This is i: " + i);
-						console.log("This is j: " + j);
-						console.log(datamatrix[i-1][j-1]);
-						console.log(text_newcol.val());
-						
-						datamatrix[i-1][j-1] = text_newcol.val();
-						
-						console.log("This is now the datamatrix: " + datamatrix);
-						
-					});
-					
-					newcol.append(text_newcol);
-				
-				}
-			
-				if (i == 0 && j != datamatrix[i].length - 1){
-					
-					if (datamatrix[0].length > 2){
-						
-						var btn_newcol = $("<button type='button'>x</button>");
-						
-						btn_newcol.attr("onclick", "removeCol(" + j + ")");
-					
-						newcol.append(btn_newcol);
-						
-					}
-					
-					newcol.css("background-color", "blue");
-				
-				}
-			}else{
-				
-				if (i > 0){
-					
-					var btn_delrow = $("<button type='button'>x</button>");
-					btn_delrow.attr("onclick", "removeRow(" + i + ")");
-					
-					newcol.append(btn_delrow);
-				}
-				
-			}
-			
-			newrow.append(newcol);
-			
-		}
-		
-		$("#datatable").append(newrow);
-		
-	}*/

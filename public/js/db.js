@@ -8,6 +8,20 @@ function init(){
 	db = getURLVariable('db');
 	user = getURLVariable('user');
 	
+	
+	//var me = $.get("/whoami")
+	//get fingerprint
+	var fp = localStorage.getItem('fingerprint');
+	if(fp == null){
+		//generate fingerprint
+		fp = guid();
+		localStorage.setItem('fingerprint', fp);
+	}
+	
+	
+	$.post("/record-view" ,{db:db, user:user, fp:fp});
+	
+	
 	$.post("/viewDatabase", {
 		db:db,
 		user:user,
@@ -28,7 +42,7 @@ function init(){
 		$(".db-title").html(summ.database);
 		
 		//TODO: Append more owners
-		var authors = summ.owner[0];
+		var authors = summ.admin;
 		$(".db-authors").html(authors);
 		
 		
@@ -66,3 +80,14 @@ function download(){
 	})
 }
 
+var guid = (function() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+  }
+  return function() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+  };
+})();

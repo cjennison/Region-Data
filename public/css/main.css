@@ -84,6 +84,18 @@
 	
 }
 
+.panel-regiondata{
+	
+	padding: 0 !important;
+	
+}
+
+.nav-dataoptions{
+	
+	float:right;
+	
+}
+
 #footer_bot{
 	position:absolute;
 	bottom:0px;
@@ -134,6 +146,13 @@
 #btn_addnew{
 	
 	float:right;
+	
+}
+
+#btn_schema{
+	
+	float:right;
+	margin-right:10px;
 	
 }
 

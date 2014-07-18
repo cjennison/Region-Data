@@ -9,6 +9,9 @@
 
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/main.css" rel="stylesheet">
+		<!--<link href="/lib/chosen/chosen.min.css" rel="stylesheet">
+		<link href="/lib/chosen/docsupport/prism.css" rel="stylesheet">
+		<link href="/lib/chosen/docsupport/style.css" rel="stylesheet">-->
 
 	</head>
 
@@ -16,7 +19,12 @@
 		
 		<iframe id="downloadframe" style="display:none"></iframe>
 
+	
 		<div class="col-md-12">
+
+			<% include header %>
+
+			<!-- 
 
 			<div class="row content-row">
 
@@ -47,6 +55,8 @@
 
 			</div>
 			
+			-->
+			
 			<div class = "row content-row">
 				
 				<div class="col-lg-1 col-centered content-col" id="my_data">
@@ -63,7 +73,7 @@
 									</button>
 									
 									<h4 class="modal-title text_hdr" id="myModalLabel">Upload Data</h4>
-									
+								
 								</div>
 								
 								<div class="modal-body">
@@ -71,7 +81,17 @@
 									<form action='/upload' method='post' id="form_upload" enctype='multipart/form-data'>
 						
 										<input type="text" class="form-control" id="field_name" name="name" placeholder="Name">
-										<input type="text" class="form-control" id="field_subject" name="subject" placeholder="Subject (optional)">
+										
+										<select class="form-control" id="select_filetype" name="filetype"></select>
+										
+										<input type="text" class="form-control" id="field_subject" name="subject" placeholder="Subject" autocomplete="off">
+										
+										<ul class="list-group" id="opts_subject" hidden>
+											
+												
+											
+										</ul>
+										
 										<textarea rows="4" class="form-control" placeholder="Description (optional)" id="field_description" name="description"></textarea>
 										
 										<input type='file' id="btn_choosefile" name='uploadfile'>
@@ -85,12 +105,6 @@
 									</form>
 									
 								</div>
-								
-								<!--<div class="modal-footer">
-									<button type="button" class="btn btn-regiondata">
-										Upload
-									</button>
-								</div>-->
 							</div>
 						</div>
 					</div>
@@ -142,6 +156,8 @@
 						
 					</div>
 					
+					<a href="/schema?view=public" id="btn_schema" class="btn btn-default btn-lg btn-regiondata">Schemas</a>
+					
 				</div>
 				
 			</div>
@@ -183,6 +199,9 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/main.js"></script>
+		<!--<script src="lib/chosen/chosen.jquery.min.js"></script>
+		<script src="lib/chosen/chosen.proto.min.js"></script>
+		<script src="lib/chosen/docsupport/prism.js"></script>-->
 
 	</body>
 </html>

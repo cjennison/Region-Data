@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet">
+		<link href="/css/schema.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+		
+		<iframe id="downloadframe" style="display:none"></iframe>
+
+		<div class="col-md-12">
+
+			<% include header %>
+			
+			<div class="row content-row">
+				
+				<div class="col-lg-1 col-centered content-col">
+					
+					<div id="sec_navschema">
+
+						<div class="navbar navbar-default" role="navigation" id="nav_schemas">
+
+							<ul class="nav nav-tabs" role="tablist">
+
+								<li id="btn_public">
+
+									<a id="tab_public">Public</a>
+
+								</li>
+
+								<li id="btn_mine">
+
+									<a id="tab_mine">Mine</a>
+
+								</li>
+
+							</ul>
+
+							<div class="panel panel-default">
+
+								<table class="table">
+
+									<thead>
+
+										<tr>
+
+											<th>Name</th>
+											<th>Options</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody id="list_schemas"></tbody>
+
+								</table>
+
+							</div>
+
+						</div>
+						
+						<a class="btn btn-lg btn-regiondata" id="btn_createschema">Create New</a>
+
+					</div>
+					
+					<div id="sec_createschema" hidden>
+						
+						<p class="text_hdr">New Schema</p>
+						
+						<form class='form-horizontal'>
+							
+							<div class='form-group'>
+							
+								<div class="col-sm-8"><input class="form-control" placeholder="Please enter a name."></div>
+								<div class="col-sm-1"><button type="button" class="btn btn-md btn-regiondata">Save</button></div>
+								<div class="col-sm-3"><button type="button" class="btn btn-md btn-warning" id="btn_openall">Open All</button><button type="button" class="btn btn-md btn-warning" id="btn_closeall">Close All</button></div>
+							
+							</div>
+							
+						</form>
+						
+						<div id="params_schema"></div>
+						
+						<button type="button" id="btn_addattr" class="btn btn-default btn-lg btn-regiondata">
+  							
+  							<span class="glyphicon glyphicon-plus"></span>
+  							
+						</button>
+
+					</div>
+					
+					
+					<div id="sec_conformschema" hidden>
+						
+						<div class="col-md-6">
+							
+							<ul class="list-group" id="list_dbparams">
+								
+								
+								
+							</ul>
+							
+						</div>
+						
+						<div class="col-md-6">
+							
+							<ul class="list-group" id="list_schemaparams">
+								
+								
+								
+							</ul>
+							
+							<input class="form-control" id="input_newname" placeholder="Dataset Name">
+							
+						</div>
+						
+						<a class="btn btn-lg btn-regiondata" id="btn_conformdataset">Conform Dataset</a>
+						
+						<div class="checkbox" id="checkbox_replace">
+							<label>
+								<input type="checkbox"> Replace existing dataset.
+							</label>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+	</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/utils.js"></script>
+		<script src="js/schema.js"></script>
+
+	</body>
+</html>

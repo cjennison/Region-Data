@@ -10,6 +10,16 @@ See V:0.1 for Details. http://felek.cns.umass.edu:1337/
 
 ####UPDATES
 
+#####V.03: Fat Salmon
+> - Added subject searching & filtering in file upload (for recommending schemas).
+> - Added Logout & User Settings buttons.
+> - Fixed dataset creation & updating within the database (from Add Data > Create New).
+> - Added interface for browsing schemas (Schemas button in My Data).
+> - Added interface for conforming datasets to schemas (Browse > Gear Icon > Schemas > [Select One]). Doesn't yet enter into database.
+> - Added interface for creating schemas (Schemas > Create New). Doesn't yet enter into database.
+> - Created structure in database for schemas.
+> - Added interface for searching in header of datasets (Browse). Doesn't do anything yet.
+
 #####V.02: Angry Sturgeon
 > - Added browse & editing in an integrated system.
 > - Added download window, with options to enter subject, description, etc.

@@ -1,0 +1,7 @@
+{
+	"name": "sql to mongodb",
+  "version": "0.0.1",
+  "author": "Chris Jennison <cjennison92@gmail.com>",
+  "description": " A library for parsing SQL Queries to MongoDB",
+  "main": "./index.js"
+}

@@ -2,7 +2,10 @@ var http	= require('http'),
 	express	= require('express')//,
 	user_routes = require('./routes/index')
 	data_routes = require('./routes/data')
+	schema_routes = require('./routes/schema')
+	util_routes	  = require("./routes/utils")
 	database = require('./lib/database')
+	query_routes  = require("./routes/query")
 	//index	= require
 var zip = require('express-zip');
 var url = require('url');
@@ -59,6 +62,7 @@ app.get('/', function(req, res){
 app.get('/browse', user_routes.browsePage);
 app.get('/edit', user_routes.editPage);
 app.get('/browse', user_routes.browsePage);
+app.get('/schema', user_routes.newSchema);
 app.get('/model', user_routes.modelPage);
 app.get('/db', user_routes.showDatabase);
 app.get('/data-viewer', user_routes.viewData);
@@ -100,20 +104,45 @@ app.post('/download', data_routes.download);
 //DATA
 app.post('/send-results', data_routes.sendResults);
 app.post('/get-data-by-date', data_routes.getDataByDate);
-app.get('/user-databases', data_routes.exportDatabases);
+app.get ('/user-databases', data_routes.exportDatabases);
 app.post('/showdatabase', data_routes.showDatabaseOfUser);
 app.post('/send-results', data_routes.sendResults);
-app.get('/getAllData', data_routes.getAllData);
+app.get ('/getAllData', data_routes.getAllData);
 app.post('/viewDatabase', data_routes.getSingleDatabase);
 app.post('/create-database', data_routes.createDatabase);
 app.post('/remove-database', data_routes.removeDatabase);
 app.post('/add-relation', data_routes.addRelation);
 app.post('/get-relations', data_routes.getRelations);
 
+app.post('/update-database', data_routes.updateDatabase);
+
+
+app.post('/record-view', data_routes.recordView);
+
+
+//SCHEMAS
+app.post("/submitschema", schema_routes.submitSchema);
+app.get ("/allSchemas", schema_routes.getAllSchemas);
+app.post("/createNewFromSchema", schema_routes.createNewDBFromSchema);
+app.post ("/getSingleSchema", schema_routes.getSingleSchema);
+
+app.get("/getstream", data_routes.getStream);
 
 //UI
 app.post('/morerows', data_routes.getMoreRows);
 
+//SQL
+app.post('/parse-sql', util_routes.parseSQLToMongo);
+
+//QUERY
+app.post("/query-explore", query_routes.queryExplore);
+
+
+app.get('/logout', function(req, res){
+	req.session.username = undefined;
+	
+	res.send("Success");
+})
 
 //UTIL
 app.get('/whoami', function(req, res){
@@ -121,7 +150,7 @@ app.get('/whoami', function(req, res){
 })
 
 
-
+app.get('/subjectsbypopularity', data_routes.getSubjectsByPopularity);
 
 //Listener
 var server = app.listen(1337, function(){

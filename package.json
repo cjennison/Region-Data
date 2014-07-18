@@ -8,6 +8,7 @@
     "ejs": ">= 0.8.3",
     "mongodb": ">= 1.0",
     "json2csv": "latest",
-    "xls-to-json": "latest"
+    "xls-to-json": "latest",
+    "csvtojson": "latest"
   }
 }

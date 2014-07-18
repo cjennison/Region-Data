@@ -9,10 +9,10 @@ function init(){
 			var data = d[i];
 			
 			var tr = $("<tr></tr>");
-			$(tr).append("<td><a href='/db?db=" + data.database + "&user=" + data.owner[0] + "'>" + data.database + "<a></td>");
-			$(tr).append("<td>" + data.owner[0] + "</td>");
+			$(tr).append("<td><a href='/db?db=" + data.database + "&user=" + data.admin + "'>" + data.database + "<a></td>");
+			$(tr).append("<td>" + data.admin + "</td>");
 			$(tr).append("<td>" + data.size + "</td>");
-			$(tr).append("<td><button class='btn btn-default' onclick='download( &#39;" + data.database +  "&#39;, &#39;" + data.owner[0] + "&#39;)'>Download</button></td>");
+			$(tr).append("<td><button class='btn btn-default' onclick='download( &#39;" + data.database +  "&#39;, &#39;" + data.admin + "&#39;)'>Download</button></td>");
 			$("#db-explore").find("tbody").append(tr);
 			
 		}

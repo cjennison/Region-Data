@@ -62,3 +62,7 @@ exports.showDatabase = function(req, res){
 	res.render('db.ejs');
 }
 
+exports.newSchema = function(req, res){
+	res.render('schema.ejs');
+}
+

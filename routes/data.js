@@ -2,6 +2,7 @@ var database = require("../lib/database");
 var uploader = require("../lib/uploader");
 var downloader = require("../lib/downloader");
 var saver		= require("../lib/modelsaver")
+var uuid	 = require("node-uuid");
 
 exports.getDataByDate = function(req, res){
 	
@@ -16,6 +17,36 @@ exports.getDataByDate = function(req, res){
 	
 }
 
+
+exports.getStream	= function(req, res){
+	uploader.getStream(function(d){
+		res.json(d);
+	})
+}
+
+exports.recordView = function(req, res){
+	
+	if(req.session[req.body.db] == undefined){
+		req.session[req.body.db] = {};
+	}
+	//TODO: Not Working
+	var last_fp = req.session[req.body.db].fp;
+	if(last_fp == null){
+		console.log(last_fp);
+		req.session[req.body.db].fp = req.body.fp;
+		console.log(req.session[req.body.db]);
+		database.recordView(req.body, function(d){
+			res.json(d);
+		})
+	} else {
+		console.log("Been here")
+		res.json("You've already been here");
+	}
+	
+	
+	
+	
+}
 
 
 /**
@@ -162,10 +193,17 @@ exports.removeDatabase = function(req, res){
 	
 	database.removeDatabase(req.body.db, req.body.user, function(d){
 		
-		res.json(d);
+		res.redirect("/main?removal=complete" + uuid.v4());
+		//res.json(d);
 		
 	});
 	
+}
+
+exports.updateDatabase = function(req, res){
+	database.updateDatabase(req.session.username, req.body, function(d){
+		res.send(d);
+	})
 }
 
 exports.getAllData = function(req, res){
@@ -175,8 +213,26 @@ exports.getAllData = function(req, res){
 	})
 }
 
+exports.getSubjectsByPopularity = function(req, res){
+	
+	database.getSubjectsByPopularity(function(d){
+		res.json(d);
+	})
+	
+}
+
+exports.getSchemasFromSubject = function(req, res){
+	
+	database.getSchemasFromSubject(function(d){
+		
+		res.json(d);
+		
+	});
+	
+}
+
 exports.getSingleDatabase =  function(req, res){
-	var db = req.body.db;
+	var db = req.body.db != "" ? req.body.db : null;
 	var user = req.body.user;
 	var you  = req.session.username;
 	var limit = req.body.limit;

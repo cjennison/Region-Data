@@ -19,34 +19,9 @@
 
 		<div class="col-md-12">
 
-			<div class="row content-row">
+			<% include header %>
 
-				<div class="col-lg-1 col-centered content-col" id="navigation_top">
-
-					<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="nav_top">
-						<div class="container">
-							<div class="navbar-header">
-								<a class="navbar-brand" href="#"><img src="img/logo_regiondata_white.png" id="logo"></a>
-							</div>
-							<div class="navbar-collapse collapse">
-								<ul class="nav navbar-nav">
-									<li class="btn-nav-top-2" id="button_mydata">
-										<a href="#">My Data</a>
-									</li>
-									<li class="btn-nav-top" id="button_explore">
-										<a href="#">Explore</a>
-									</li>
-									<li>
-										<a href="#contact"></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
+			
 			
 			<div class = "row content-row">
 				
@@ -126,9 +101,34 @@
 					
 					<div class="panel panel-default panel-regiondata" id="panel_datatable">
 						
-						<div class="panel-heading heading-regiondata">
+						<div class="panel-heading heading-regiondata editheader">
 							
 							<p id="header_dataname"></p>
+							
+							<div class='form-horizontal' id='searchpanel'>
+								
+								<div class='col-sm-1' style='text-align: right; font-size:14px;'>
+									Search
+								</div>
+								<div class='col-sm-4'>
+									<select id='search-select' class='form-control'>
+										<option>a</option>
+										<option>b</option>
+										<option>c</option>
+									</select>
+								</div>
+								<div class='col-sm-6'>
+									<input class='form-control' type='text' id='search-value' placeholder="Type in a value to search your database">
+								</div>
+								<div class='col-sm-1'>
+									<button class='btn btn-warning'>Go</button>
+								</div>
+								
+								
+								
+								
+								
+							</div>
 							
 						</div>
 					
@@ -136,7 +136,28 @@
 						
 					</div>
 					
-					<a href="#" data-toggle="modal" data-target="#relationModal" type="button" class="btn btn btn-regiondata" id="btn_specrelation">Relations</a>
+					<!--<a href="#" data-toggle="modal" data-target="#relationModal" type="button" class="btn btn btn-regiondata" id="btn_specrelation">Relations</a>-->
+					
+					<div class="btn-group" id="btn_specrelation">
+						
+						<button class="btn btn-default btn-regiondata dropdown-toggle" type="button" data-toggle="dropdown"><span id="icon_cog" class="glyphicon glyphicon-cog"></span><span class="caret"></span></button>
+						<ul class="dropdown-menu pull-right" role="menu">
+							
+							<li>
+								
+								<a href="#" data-toggle="modal" data-target="#relationModal">Relations</a>
+								
+							</li>
+							
+							<li>
+								
+								<a id="btn_schemas">Schemas</a>
+								
+							</li>
+							
+						</ul>
+						
+					</div>
 					
 					<button type="button" class="btn btn btn-regiondata" id="btn_savedata">Save</button>
 					
